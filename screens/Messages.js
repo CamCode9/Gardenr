@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, TextInput, Button, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
-import { StyleSheet } from 'react-native-web';
+import { StyleSheet } from 'react-native';
 import { auth, db } from '../firebase2';
 import { ref } from 'firebase/database';
 import { collection, doc, getDocs, setDoc } from 'firebase/firestore';

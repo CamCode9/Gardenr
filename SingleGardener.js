@@ -6,7 +6,7 @@ import {
   Picker,
 } from 'react-native';
 import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
-import { ScrollView } from 'react-native-web';
+import { ScrollView } from 'react-native';
 import { TextInput, TouchableOpacity } from 'react-native';
 import { auth } from './firebase2';
 import {
@@ -38,6 +38,17 @@ const SingleGardener = ({ route }) => {
   const navigation = useNavigation();
 
   useEffect(() => {
+    // get chatdata
+    const chatRef = query(
+      collection(db, 'chatrooms'),
+      where('user1', '==', currentUser),
+      where('user2', '==', gardener.email)
+    );
+
+    getDocs(chatRef).then((snapshot) => {
+      if (snapshot.docs[0]) setChatData(snapshot.docs[0].data());
+    });
+
     // get user id
     const userRef = query(
       collection(db, 'clients'),
@@ -107,17 +118,21 @@ const SingleGardener = ({ route }) => {
     //   });
     // }
 
-    if (!chatId) {
+    if (!chatData.chatId) {
       addDoc(collection(db, 'chatrooms'), {
         user1: currentUser,
         user2: gardener.email,
       }).then((snapshot) => {
         setChatId(snapshot.id);
-        navigation.navigate('Chat', {
-          currentUserId,
-          currentUserData,
-          gardenerEmail: gardener.email,
+        updateDoc(doc(db, 'chatrooms', snapshot.id), {
           chatId: snapshot.id,
+        }).then(() => {
+          navigation.navigate('Chat', {
+            currentUserId,
+            currentUserData,
+            gardenerEmail: gardener.email,
+            chatId: snapshot.id,
+          });
         });
       });
     } else {
@@ -125,7 +140,7 @@ const SingleGardener = ({ route }) => {
         currentUserId,
         currentUserData,
         gardenerEmail: gardener.email,
-        chatId,
+        chatId: chatData.chatId,
       });
     }
   };
