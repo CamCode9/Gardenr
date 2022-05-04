@@ -1,16 +1,19 @@
-import React, { useState } from "react";
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import LoginScreen from "./screens/LoginScreen";
-import HomeScreen from "./screens/HomeScreen";
-import SearchScreen from "./screens/SearchScreen";
-import SearchList from "./screens/SearchList";
-import RegisterButtons from "./screens/RegisterButtons";
-import GardenerRegister from "./screens/GardenerRegister";
-import UserRegister from "./screens/UserRegister";
-import GardenerHome from "./screens/GardenerHome";
+import React, { useState } from 'react';
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import LoginScreen from './screens/LoginScreen';
+import HomeScreen from './screens/HomeScreen';
+import SearchScreen from './screens/SearchScreen';
+import SearchList from './screens/SearchList';
+import RegisterButtons from './screens/RegisterButtons';
+import GardenerRegister from './screens/GardenerRegister';
+import UserRegister from './screens/UserRegister';
+import GardenerHome from './screens/GardenerHome';
+import SingleGardener from './SingleGardener';
+import Chat from './screens/Chat';
+import Messages from './screens/Messages';
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +33,9 @@ export default function App() {
         <Stack.Screen name="User Register" component={UserRegister} />
         <Stack.Screen name="Gardener Home" component={GardenerHome} />
         <Stack.Screen name="Client Home" component={HomeScreen} />
+        <Stack.Screen name="Messages" component={Messages} />
+        <Stack.Screen name="SingleGardener" component={SingleGardener} />
+        <Stack.Screen name="Chat" component={Chat} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -38,8 +44,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
