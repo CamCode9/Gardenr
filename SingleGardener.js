@@ -104,21 +104,8 @@ const SingleGardener = ({ route }) => {
         friends: [currentUserData.email],
       });
     }
-    // const gardenersRef = doc(db, 'gardeners', currentUserId);
-    // if (
-    //   currentUserData.friends?.length &&
-    //   !currentUserData.friends.includes(gardener.email)
-    // ) {
-    //   updateDoc(clientsRef, {
-    //     friends: [gardener.email, ...currentUserData.friends],
-    //   });
-    // } else if (!currentUserData.friends.includes(gardener.email)) {
-    //   updateDoc(clientsRef, {
-    //     friends: [gardener.email],
-    //   });
-    // }
 
-    if (!chatData.chatId) {
+    if (!chatData.chatId && chatId === null) {
       addDoc(collection(db, 'chatrooms'), {
         user1: currentUser,
         user2: gardener.email,
@@ -140,7 +127,7 @@ const SingleGardener = ({ route }) => {
         currentUserId,
         currentUserData,
         gardenerEmail: gardener.email,
-        chatId: chatData.chatId,
+        chatId,
       });
     }
   };
