@@ -13,7 +13,7 @@ import UserRegister from './screens/UserRegister';
 import GardenerHome from './screens/GardenerHome';
 import SingleGardener from './SingleGardener';
 import Chat from './screens/Chat';
-import Messages from './screens/Messages';
+import GardenerMessages from './screens/GardenerMessages';
 
 const Stack = createNativeStackNavigator();
 
@@ -33,7 +33,7 @@ export default function App() {
         <Stack.Screen name="User Register" component={UserRegister} />
         <Stack.Screen name="Gardener Home" component={GardenerHome} />
         <Stack.Screen name="Client Home" component={HomeScreen} />
-        <Stack.Screen name="Messages" component={Messages} />
+        <Stack.Screen name="GardenerMessages" component={GardenerMessages} />
         <Stack.Screen name="SingleGardener" component={SingleGardener} />
         <Stack.Screen name="Chat" component={Chat} />
       </Stack.Navigator>

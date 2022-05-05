@@ -6,7 +6,7 @@ import { auth, db } from '../firebase2';
 import { ref } from 'firebase/database';
 import { collection, doc, getDocs, setDoc } from 'firebase/firestore';
 
-const Messages = () => {
+const GardenerMessages = () => {
   const currentUser = auth.currentUser.email;
   const [friends, setFriends] = useState([]);
   const [selectedUser, setSelectedUser] = useState('');
@@ -74,7 +74,7 @@ const Messages = () => {
   );
 };
 
-export default Messages;
+export default GardenerMessages;
 
 const styles = StyleSheet.create({
   avatar: {

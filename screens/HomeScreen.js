@@ -34,9 +34,6 @@ const HomeScreen = ({ route }) => {
       <TouchableOpacity onPress={handleSearch} style={styles.button}>
         <Text style={styles.buttonText}>Search</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={handleChat} style={styles.button}>
-        <Text style={styles.buttonText}>Chat</Text>
-      </TouchableOpacity>
     </View>
   );
 };

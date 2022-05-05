@@ -83,7 +83,7 @@ const SingleGardener = ({ route }) => {
       updateDoc(clientsRef, {
         friends: [gardener.email, ...currentUserData.friends],
       });
-    } else if (!currentUserData.friends.includes(gardener.email)) {
+    } else if (!currentUserData.friends?.includes(gardener.email)) {
       updateDoc(clientsRef, {
         friends: [gardener.email],
       });
