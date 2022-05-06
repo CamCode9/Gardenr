@@ -1,4 +1,9 @@
-import React, { useState, useCallback, useLayoutEffect } from 'react';
+import React, {
+  useState,
+  useCallback,
+  useLayoutEffect,
+  useEffect,
+} from 'react';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { auth } from '../firebase2';
 import {
@@ -39,17 +44,25 @@ const Chat = ({ route }) => {
     getDocs(q)
       .then((snapshot) => {
         chatId = snapshot.docs[0]._key.path.segments[6];
-      })
-      .then(() => {
-        collection(db, 'chatrooms', chatId, 'messages');
+        collection(
+          db,
+          'chatrooms',
+          snapshot.docs[0]._key.path.segments[6],
+          'messages'
+        );
         const q2 = query(
-          collection(db, 'chatrooms', chatId, 'messages'),
+          collection(
+            db,
+            'chatrooms',
+            snapshot.docs[0]._key.path.segments[6],
+            'messages'
+          ),
           orderBy('createdAt', 'desc')
         );
 
-        const unsubscribe = onSnapshot(q2, (snapshot) =>
+        const unsubscribe = onSnapshot(q2, (snapshot2) =>
           setMessages(
-            snapshot.docs.map((doc) => ({
+            snapshot2.docs.map((doc) => ({
               _id: doc.data()._id,
               createdAt: doc.data().createdAt.toDate(),
               text: doc.data().text,
