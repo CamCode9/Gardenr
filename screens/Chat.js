@@ -14,17 +14,28 @@ import { db } from '../firebase2';
 
 const Chat = ({ route }) => {
   const [messages, setMessages] = useState([]);
+  const isGardener = route.params.isGardener ? route.params.isGardener : false;
+  const { clientEmail } = route.params;
   const { currentUserId } = route.params;
   const { currentUserData } = route.params;
   const { gardenerEmail } = route.params;
   let chatId;
 
   useLayoutEffect(() => {
-    const q = query(
-      collection(db, 'chatrooms'),
-      where('user1', '==', auth.currentUser.email),
-      where('user2', '==', gardenerEmail)
-    );
+    let q;
+    if (isGardener) {
+      q = query(
+        collection(db, 'chatrooms'),
+        where('user1', '==', clientEmail),
+        where('user2', '==', auth.currentUser.email)
+      );
+    } else {
+      q = query(
+        collection(db, 'chatrooms'),
+        where('user1', '==', auth.currentUser.email),
+        where('user2', '==', gardenerEmail)
+      );
+    }
     getDocs(q)
       .then((snapshot) => {
         chatId = snapshot.docs[0]._key.path.segments[6];
@@ -60,6 +71,7 @@ const Chat = ({ route }) => {
       GiftedChat.append(previousMessages, messages)
     );
     const { _id, createdAt, text, user } = messages[0];
+
     try {
       addDoc(collection(db, 'chatrooms', chatId, 'messages'), {
         _id,
