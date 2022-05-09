@@ -12,7 +12,6 @@ import {
 
 const MyMap = () => {
 
-  const [ gardPostCode, setGardPostCode ] = useState("");
   const [ gardCoords, setGardCoords ] = useState({});
   
   const colRef = collection(db, 'gardeners');
@@ -20,15 +19,13 @@ const MyMap = () => {
 
   useEffect(() => {
     getDocs(q).then((snapshot) => {
-      setGardPostCode(snapshot.docs[0].data().postCode);
-      setGardCoords({...postCodeToCoords(gardPostCode)});
+      postCodeToCoords(snapshot.docs[0].data().postCode)
     })
   }, []);
 
   const postCodeToCoords = (postcode) => {
     axios.get(`https://api.postcodes.io/postcodes/${postcode}`)
     .then((geoData) => {
-      console.log(typeof geoData.data.result.latitude, "TYPE")
       setGardCoords({
         latitude: geoData.data.result.latitude,
         longitude: geoData.data.result.longitude,
@@ -279,7 +276,7 @@ const MyMap = () => {
             </Text>
           </Callout>
         </Marker>
-        
+
       </MapView>
     </View>
   );
