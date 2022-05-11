@@ -61,7 +61,7 @@ const ViewDetailsScreen = () => {
       </TouchableOpacity>
 
       <TouchableOpacity onPress={handleChat} style={styles.button}>
-        <Text style={styles.buttonText}>Chat</Text>
+        <Text style={styles.buttonText}>Messages</Text>
       </TouchableOpacity>
 
       <TouchableOpacity onPress={handleMap} style={styles.button}>

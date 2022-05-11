@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Image,
   Modal,
+  Alert,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { db } from '../firebase2';
@@ -19,7 +20,6 @@ import {
 import { useNavigation } from '@react-navigation/core';
 import { collection, addDoc, getDocs, query, where } from 'firebase/firestore';
 
-
 const LoginScreen = () => {
   //   const [email, setEmail] = useState("");
   //   const [password, setPassword] = useState("");
@@ -28,8 +28,6 @@ const LoginScreen = () => {
     email: '',
     password: '',
   });
-  
-  const [modalVisible, setModalVisible] = useState(false);
 
   const navigation = useNavigation();
 
@@ -92,35 +90,13 @@ const LoginScreen = () => {
         console.log(user, 'IN HANDLE LOGIN');
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
         console.log(error.message);
-        setModalVisible(true);
+        Alert.alert('Error', 'Invalid login details, please try again');
       });
   };
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
-      <Modal
-        animationType="slide"
-        transparent={false}
-        presentationStyle="pageSheet"
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-          setModalVisible(!modalVisible);
-        }}
-      >
-        <View style={styles.container}>
-            <Text>Invalid Login details, please try again</Text>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => setModalVisible(!modalVisible)}
-            >
-              <Text style={styles.textStyle}> Ok </Text>
-            </TouchableOpacity>
-          </View>
-      </Modal>
       <Image source={require('../assets/logo.png')} style={styles.logo} />
       <View style={styles.inputContainer}>
         <TextInput
