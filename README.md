@@ -10,7 +10,7 @@ Gardenr was created in response to the increasing popularity for gardening in th
 
 In addition, the app allowed the Node Survivors team to experiment and implement some fascinating frameworks and new tech, from no-SQL backend services (FireStore, Firebase Auth) to real-time messaging (Gifted Chat) to map functionality (Google Maps API and Geocoding Extension) and even designing our own logo and themes.
 
-Check out the video to find out more.
+Check out the video to find out more --> https://northcoders.com/projects/may-2022/gardenr
 
 Gardenr was designed and created by:
 
